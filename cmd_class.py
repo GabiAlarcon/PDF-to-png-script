@@ -3,7 +3,7 @@ import os
 
 class FoutieveRange(Exception):
     pass
-# maak schrijf logs naar file
+# This class contains utilities methods for creating litle CMD programs for Windows
 class CmdUtils:
     @staticmethod
     def ask_int(message):
