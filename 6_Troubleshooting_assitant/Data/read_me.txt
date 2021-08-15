@@ -1,0 +1,3 @@
+hier shoud be sensitive information of the database of Getra in Json format.
+
+All information about the database of Getra is not going to be published...
