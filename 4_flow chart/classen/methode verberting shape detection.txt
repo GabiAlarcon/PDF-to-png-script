@@ -1,0 +1,35 @@
+bij countours herkenning heb je een parameter nl.
+aprox:
+	approx = cv2.approxPolyDP(contour, aprox * cv2.arcLength(contour, True), True)
+
+deze parameter bepaald het best aproximation voor de herkening van en schape. 
+indien die te laag => 0 is dan zou je te veel punten waardoor je zal andere zal shapes hebben 
+
+als die parameter te hoog is dan zou zou je te weinig aproximatie punten waardoor shapes niet herkend worden of vervormd.
+
+een oncorrecte manier van de gevonden shapes beinvloed de uitkomst op het einde voor een flowchart aan te maken.
+
+
+vóór dat de shapes worden herkend moet de afbeelding worden voorgeproceseerd hier door kan je de pijlen die verbonden worden aan de shapes kunnen verwijderen,  een ook de tekst dat binnen elke shape is wegwerken op dit manier wordt de shape herkenning geoptimaliseerd. 
+
+de afbeelding moet eerst worden omgezet naar een gray scale zodat alle kleur weg kan gaan
+hierdoor kunnen binary thresh hold kunnen toegepast worden
+
+er zijn 2 parameters die er mee rekenning moet gehouden worden.
+	1- binary_threshold_inv_begin
+	2- gaussian bluring
+
+wat je wilt hebben met de eerst parameter is dat de grijs-kleur vlakken binnen in de shapes naar zwaart omgezet worden.  hierdoor worden de tekst binnenin ook verstopt.
+binary_threshold_inv_begin  is better tussen 232 en 241, de andere waarde hoogste waarde is altijd 255. alle waarden die buiten die treshhold is zal dan zwaart zijn de
+alles dat binnen is zal wit zijn. Deze nieuwe afbeelding zal dan gebruikt worden om verdere verwerking.
+
+eens dat deze correct uitgevoerd is moet ed gaussian blurring aangepast worden. Hiermee worden de lijnen in de afbeelding verwijderd door een bluring te gebruiken hierdoor worden lijnen en pijlen verwijderd van de afbeelding
+
+
+methode aanpassing van parameters
+	contour aproximation is standaard 0.02 voor deze toepassing (dit werd bepaald door handmatig testen)
+	de bluring is in de meeste gevalen best tussen 41 - 53 (dit werd bepaald door testen uit te voeren) (OPPASSEN: dit waarde diendt altijd een onenven getaal te zijn dit komt omdat de gebruikte library cv2 een oneven waarde nodig heeft)
+
+	om de juiste paremeters te vinden is het best om eerst de bluring te gaan verhogen, indien er shapes niet meer herkend worden dan verlaag weer naar.
+	nu moet je verhogen de contour_aproximation met 0.01 als de shapes herkend worden is dit ok anders weer de bluring verhogen. herhaald die tot de geweeste waarde 
+	bekomt wordt.
